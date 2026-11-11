@@ -21,7 +21,7 @@ export type Mat3 = number[];
 // 2D vector
 export class V2 {
     static create(x: number, y: number): Vec2 {
-        const v = new Float32Array(2);
+        let v = new Float32Array(2);
         v[0] = x;
         v[1] = y;
         return v;
@@ -33,7 +33,18 @@ export class V2 {
         dest[Y] = u[Y] + v[Y];
         return dest;
     }
-
+    static substract(u: Vec2, v: Vec2, dest?: Vec2): Vec2 {
+        dest = dest || new Float32Array(2);
+        dest[X] = u[X] - v[X];
+        dest[Y] = u[Y] - v[Y];
+        return dest;
+    }
+    static scale(v: Vec2, n: number, dest?: Vec2): Vec2{
+        dest = dest || new Float32Array(2);
+        dest[X] = v[X] * n;
+        dest[Y] = v[Y] * n;
+        return dest;
+    }
     // TODO: Add the methods: subtract and scale
     // - subtract: receives two Vec2, and an optional 3rd Vec2.
     //      returns the result of the subtraction inside of the 3rd Vec2
@@ -57,25 +68,29 @@ export class M3 {
     // transformation matrix
 
     static translation(v: Vec2): Mat3 {
+        let tx: number = v[X];
+        let ty: number = v[Y];
         return [
             1,  0,  0,
             0,  1,  0,
-            0,  0,  1,
+            tx,  ty,  1,
         ];
     }
 
     static rotation(angleRadians: number): Mat3 {
         return [
-            1,  0,  0,
-            0,  1,  0,
-            0,  0,  1,
+            Math.cos(angleRadians), Math.sin(angleRadians), 0,
+            -Math.sin(angleRadians), Math.cos(angleRadians), 0,
+            0, 0, 1,
         ];
     }
 
     static scale(v: Vec2): Mat3 {
+        let sx: number = v[X];
+        let sy: number = v[Y];
         return [
-            1,  0,  0,
-            0,  1,  0,
+            sx,  0,  0,
+            0,  sy,  0,
             0,  0,  1,
         ];
     }
@@ -112,10 +127,29 @@ export class M3 {
         // The matrices are oriented transposed, so the multiplication
         // must be adjusted accordingly
 
+        // return [
+        //     a00 * b00 + a10 * b01 + a20 * b02,
+        //     a00 * b10 + a10 * b11 + a20 * b12,
+        //     a00 * b20 + a10 * b21 + a20 * b22,//Fila
+
+        //     a01 * b00 + a11 * b01 + a21 * b02,
+        //     a01 * b10 + a11 * b11 + a21 * b12,
+        //     a01 * b20 + a11 * b21 + a21 * b22,// Fila  
+
+        //     a02 * b00 + a12 * b01 + a22 * b02,
+        //     a02 * b10 + a12 * b11 + a22 * b12,
+        //     a02 * b20 + a12 * b21 + a22 * b22,// Fila
+        // ];
         return [
-            1,  0,  0,
-            0,  1,  0,
-            0,  0,  1,
+            a00 * b00 + a10 * b01 + a20 * b02,
+            a01 * b00 + a11 * b01 + a21 * b02,
+            a02 * b00 + a12 * b01 + a22 * b02,
+            a00 * b10 + a10 * b11 + a20 * b12,
+            a01 * b10 + a11 * b11 + a21 * b12,
+            a02 * b10 + a12 * b11 + a22 * b12,  
+            a00 * b20 + a10 * b21 + a20 * b22,
+            a01 * b20 + a11 * b21 + a21 * b22,
+            a02 * b20 + a12 * b21 + a22 * b22,
         ];
     }
 

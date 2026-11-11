@@ -14,7 +14,7 @@ vec4 projection2D(vec2 position, vec2 resolution) {
     vec2 clipSpace = zeroToTwo - 1.0;
 
     // Invert Y axis
-    vec4 flippedSpace = vec4(clipSpace * vec2(1, -1), 0, 1);
+    vec4 flippedSpace = vec4(clipSpace * vec2(-1, -1), 0, 1);
 
     return flippedSpace;
 }

@@ -50,12 +50,12 @@ function drawScene(
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
     // Variable to define the translation of the object
-    const translation = V2.create(240, 150);
+    const translation = V2.create(500, 250);
     // Variables for the rotation angle
-    const angleDegrees = 30;
+    const angleDegrees = 0;
     const angleRadians = angleDegrees * Math.PI / 180.0;
     // Scale factors in X and yield
-    const scale = V2.create(2.3, 0.6);
+    const scale = V2.create(3, 1.2);
 
     // Create a composite transform matrix
     const translateMatrix = M3.translation(translation);
