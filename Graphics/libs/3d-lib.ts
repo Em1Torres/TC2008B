@@ -28,17 +28,22 @@ export class V3 {
     // TODO: Complete the following methods
 
     static length(v: Vec3): number {
-        return 0;
+        return Math.sqrt(Math.pow(v[X],2) + Math.pow(v[Y],2) + Math.pow(v[Z],2));
     }
 
     static normalize(v: Vec3, dest?: Vec3): Vec3 {
         dest = dest || new Float32Array(3);
-
+        dest[X] = v[X] / this.length(v);
+        dest[Y] = v[Y] / this.length(v);
+        dest[Y] = v[Z] / this.length(v);
         return dest;
     }
 
     static dot(u: Vec3, v: Vec3): number {
-        return 0;
+        let dotx: number = u[X]*v[X];
+        let doty: number = u[Y]*v[Y];
+        let dotz: number = u[Z]*v[Z];
+        return dotx+doty+dotz;
     }
 
     static cross(u: Vec3, v: Vec3, dest?: Vec3): Vec3 {
@@ -50,7 +55,7 @@ export class V3 {
     // Add two vectors
     static add(u: Vec3, v: Vec3, dest?: Vec3): Vec3 {
         dest = dest || new Float32Array(3);
-
+        dest[X] = -1;
         return dest;
     }
 

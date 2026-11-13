@@ -29,7 +29,7 @@ class CubeOneScene extends Scene {
         const cube = this.addObject('cube', cubeFaceColors(1), [0.2, 0.6, 0.8, 1]);
     }
 
-    drawObject(object: Object3D, viewProjectionMatrix: Mat4): void {
+    drawObject(object: Object3D, viewProjectionMatrix: Mat4): void { // Receives proMatrix to include the model and camera view
         // Get the WebGL context and program info
         const { gl, programInfo } = this;
 
@@ -56,7 +56,8 @@ class CubeOneScene extends Scene {
 
         // Apply the projection to the final matrix for the
         // World-View-Projection
-        const wvpMat: Mat4 = M4.multiply(viewProjectionMatrix, transforms);
+        const wvpMat: Mat4 = M4.multiply(viewProjectionMatrix, transforms);  // Up to here combines the result matrix that gives the points of model 
+                                                                            // plus the perspective
 
         let uniforms = {
             u_worldViewProjection: wvpMat,

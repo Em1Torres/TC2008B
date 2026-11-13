@@ -153,7 +153,7 @@ function drawScene(gl: WebGL2RenderingContext): void {
     //twgl.drawBufferInfo(gl, bufferInfo, gl.LINE_STRIP);
     twgl.drawBufferInfo(gl, bufferInfo);
 
-    requestAnimationFrame(() => drawScene(gl));
+    requestAnimationFrame(() => drawScene(gl)); // Calls itself recursively to draw scene infinitely
 }
 
 function setupUI(gl : WebGLRenderingContext): void {

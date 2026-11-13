@@ -28,8 +28,8 @@ class RotationScene extends Scene {
         super(gl, vsGLSL, fsGLSL);
 
         // Create the objects for this scene
-        const model = this.addObject('model', smiley(150),
-            [ Math.random(), Math.random(), Math.random(), 1 ]);
+        const model = this.addObject('model', smiley(250),
+            [ 1, 1, 0, 1 ]);
         model.transforms.t.x = gl.canvas.width / 2;
         model.transforms.t.y = gl.canvas.height / 2;
 
@@ -58,16 +58,15 @@ class RotationScene extends Scene {
 
         // Transform matrices for the model
         // TODO: Create the matrices necessary
-
-
+        const scaleMatrixSmiley: Mat3 = M3.scale(v2_scale);
+        const translateMatrixSmiley: Mat3 = M3.translation(v2_trans);
 
         // Create a composite transform matrix
         let modelTransforms: Mat3 = M3.identity();
         // TODO: Multiply the matrices in the correct order to obtain the required results
-
-
-
-
+        modelTransforms = M3.multiply(scaleMatrixSmiley, modelTransforms);
+        modelTransforms = M3.multiply(translateMatrixSmiley, modelTransforms);
+        
         gl.useProgram(programInfo.program);
 
         let uniforms = {
@@ -78,6 +77,7 @@ class RotationScene extends Scene {
         twgl.setUniforms(programInfo, uniforms);
         gl.bindVertexArray(model.vao);
         twgl.drawBufferInfo(gl, model.bufferInfo);
+
 
         // Transform matrices for the pivot
         const translateMatrixPivot: Mat3 = M3.translation(v2_center_to_pivot);

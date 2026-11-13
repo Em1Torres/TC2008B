@@ -33,7 +33,7 @@ export class V2 {
         dest[Y] = u[Y] + v[Y];
         return dest;
     }
-    static substract(u: Vec2, v: Vec2, dest?: Vec2): Vec2 {
+    static subtract(u: Vec2, v: Vec2, dest?: Vec2): Vec2 {
         dest = dest || new Float32Array(2);
         dest[X] = u[X] - v[X];
         dest[Y] = u[Y] - v[Y];
@@ -115,6 +115,24 @@ export class M3 {
         const b20 = b[2 * 3 + 0];
         const b21 = b[2 * 3 + 1];
         const b22 = b[2 * 3 + 2];
+        // const a00 = a[0 * 3 + 0];
+        // const a10 = a[0 * 3 + 1];
+        // const a20 = a[0 * 3 + 2];
+        // const a01 = a[1 * 3 + 0];
+        // const a11 = a[1 * 3 + 1];
+        // const a21 = a[1 * 3 + 2];
+        // const a02 = a[2 * 3 + 0];
+        // const a12 = a[2 * 3 + 1];
+        // const a22 = a[2 * 3 + 2]; // a
+        // const b00 = b[0 * 3 + 0];
+        // const b10 = b[0 * 3 + 1];
+        // const b20 = b[0 * 3 + 2];
+        // const b01 = b[1 * 3 + 0];
+        // const b11 = b[1 * 3 + 1];
+        // const b21 = b[1 * 3 + 2];
+        // const b02 = b[2 * 3 + 0];
+        // const b12 = b[2 * 3 + 1];
+        // const b22 = b[2 * 3 + 2];
 
         /*
         // Matrix guide:

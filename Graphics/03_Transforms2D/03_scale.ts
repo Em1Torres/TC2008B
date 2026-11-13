@@ -1,4 +1,4 @@
-git s/*
+/*
  * Script to draw a complex shape in 2D
  * Adding scaling to the vertices of the object
  *
