@@ -98,7 +98,11 @@ function smiley(radius: number) : twgl.Arrays {
     // Sample data for a single yellow triangle. Replace with your values.
     positionData.push(0);
     positionData.push(0);
-    let sides: number = 20;
+            colorData.push(1);
+        colorData.push(1);
+        colorData.push(0);
+        colorData.push(1);
+    let sides: number = 30;
     const angleStep = 2 * Math.PI / sides;
 
     // Loop over the sides to create the rest of the vertices
@@ -122,15 +126,41 @@ function smiley(radius: number) : twgl.Arrays {
         indexData.push(s + 1);
         indexData.push(((s + 2) <= sides) ? (s + 2) : 1);
     }
-    // positionData.push(0+200, 0+200);
-    // positionData.push(120+200, 100+200);
-    // positionData.push(250+200, 100+200);
+    
+    // Right eye
+    positionData.push(95, 100);
+    positionData.push(65, 150);
+    positionData.push(105, 150);
 
-    // colorData.push(0, 0, 0, 1);
-    // colorData.push(0, 0, 0, 1);
-    // colorData.push(0, 0, 0, 1);
+    colorData.push(0, 0, 0, 1);
+    colorData.push(0, 0, 0, 1);
+    colorData.push(0, 0, 0, 1);
 
-    // indexData.push(0, 1, 2);
+    indexData.push(sides + 1, sides+2, sides+3);
+
+    // Left eye
+    positionData.push(-95, 100);
+    positionData.push(-65, 150);
+    positionData.push(-105, 150);
+
+    colorData.push(0, 0, 0, 1);
+    colorData.push(0, 0, 0, 1);
+    colorData.push(0, 0, 0, 1);
+
+    indexData.push(sides + 4, sides+5, sides+6);
+
+    // Mouth
+
+    positionData.push(-150, -100);
+    positionData.push(150, -100);
+    positionData.push(0, -150);
+
+    colorData.push(0, 0, 0, 1);
+    colorData.push(0, 0, 0, 1);
+    colorData.push(0, 0, 0, 1);
+
+    indexData.push(sides + 7, sides+8, sides+9);
+
     
 
     // Build the final object with the arrays for positions, colors, and indices

@@ -60,12 +60,18 @@ class RotationScene extends Scene {
         // TODO: Create the matrices necessary
         const scaleMatrixSmiley: Mat3 = M3.scale(v2_scale);
         const translateMatrixSmiley: Mat3 = M3.translation(v2_trans);
+        const rotateMatrixSmiley: Mat3 = M3.rotation(model.transforms.rr.z);
+        const frontPivotMatrix: Mat3 = M3.translation(v2_pivot_to_center);
+        const backPivotMatrix: Mat3 = M3.translation(v2_center_to_pivot);
 
         // Create a composite transform matrix
         let modelTransforms: Mat3 = M3.identity();
         // TODO: Multiply the matrices in the correct order to obtain the required results
         modelTransforms = M3.multiply(scaleMatrixSmiley, modelTransforms);
         modelTransforms = M3.multiply(translateMatrixSmiley, modelTransforms);
+        modelTransforms = M3.multiply(frontPivotMatrix, modelTransforms);
+        modelTransforms = M3.multiply(rotateMatrixSmiley, modelTransforms);
+        modelTransforms = M3.multiply(backPivotMatrix, modelTransforms);
         
         gl.useProgram(programInfo.program);
 
