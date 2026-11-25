@@ -174,7 +174,7 @@ describe('M4', () => {
         });
     });
 
-    /*
+    
     describe('rotationX/Y/Z', () => {
         it('rotationX 90°', () => {
             const r = M4.rotationX(Math.PI/2);
@@ -192,7 +192,6 @@ describe('M4', () => {
             arraysAlmostEqual(r, exp, 'rotZ 90°');
         });
     });
-    */
 
     describe('rotation (Multiple Angles)', () => {
         const angles = [
@@ -375,14 +374,13 @@ describe('M4', () => {
             ok(Number.isNaN(c[0]), 'multiply propagates NaN');
         });
 
-        /*
         it('translation with huge values (no overflow in Float32)', () => {
             const huge = V3.create(1e30, -1e30, 0);
             const m = M4.translation(huge);
             strictEqual(m[12], 1e30, 'translation huge X');
             strictEqual(m[13], -1e30, 'translation huge Y');
         });
-        */
+        
 
         it('rotation with 0 radians → identity', () => {
             const r = M4.rotationX(0);
@@ -447,12 +445,11 @@ describe('M4', () => {
             arraysAlmostEqual(inv, expected, 'inverse translation');
         });
 
-        /*
         it('perspective with near == far → division by zero → NaN', () => {
             const p = M4.perspective(Math.PI/3, 1, 5, 5);
             ok(Number.isNaN(p[10]), 'perspective near==far');
         });
-        */
+        
 
         it('perspective with negative near/far (invalid but defined)', () => {
             const p = M4.perspective(Math.PI/3, 1, -1, -10);
@@ -483,7 +480,7 @@ describe('M4', () => {
             strictEqual(m[14], 1, 'translation Z');
         });
 
-        /*
+        
         it('lookAt with up parallel to view direction → cross product zero', () => {
             const eye = V3.create(0, 0, 5);
             const target = V3.create(0, 0, 0);
@@ -493,7 +490,7 @@ describe('M4', () => {
             const rot = m.slice(0, 12);
             arraysAlmostEqual(rot, new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0]), 'lookAt up parallel');
         });
-        */
+        
 
         it('multiply chain: T × R × S × point should match manual composition', () => {
             const trans = M4.translation(V3.create(10, 0, 0));
@@ -576,11 +573,11 @@ describe('M4', () => {
             arraysAlmostEqual(new Float32Array(back), point, 'inverse TRS');
         });
 
-        /*
+        
         it('perspective with near=far → invalid (NaN)', () => {
             const p = M4.perspective(Math.PI / 3, 1, 5, 5);
             ok(Number.isNaN(p[10]), 'perspective near==far → NaN');
         });
-        */
+        
     });
 });
